@@ -1,0 +1,59 @@
+<div>
+  <table align="center" border="1px">
+    <thead>
+      <th>Item Name</th>
+      <th>Item Qty</th>
+      <th>Item Bought</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor='let itm of item'>
+        <td>{{itm.itemname}}</td>
+        <td>{{itm.itemqty}}</td>
+        <td>{{itm.itembought}}</td>
+        <td>
+          <button (click)="toDeleteItem(itm)">Delete</button>&nbsp;
+          <button (click)="toUpdateItem(itm)">Edit</button>&nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<br><br>
+
+<div *ngIf="!toggle">
+  <h3>Add Item</h3>
+  <form [formGroup]="addForm" (ngSubmit)="onAddItem()">
+    <div>
+      <label for="itemname">Item Name:
+      </label>
+      <input type="text" formControlName="itemname" id="itemname" />
+    </div>
+    <div>
+      <label for="itemqty">Item Qty.:
+      </label>
+      <input type="number" formControlName="itemqty" id="itemqty" />
+    </div>
+    <button class="btn btn-success">Add</button>
+  </form>
+</div>
+
+<div *ngIf="toggle">
+  <h3>Edit Item</h3>
+  <form [formGroup]="editForm" (ngSubmit)="onEditItem()">
+    <div>
+      <label for="itemname">Item Name:
+      </label>
+      <input type="text" formControlName="itemname" id="itemname" disabled/>
+    </div>
+    <div>
+      <label for="itemqty">Item Qty.:
+      </label>
+      <input type="number" formControlName="itemqty" id="itemqty" />
+    </div>
+    <button class="btn btn-success" type="submit">Save</button>&nbsp;
+    <button class="btn btn-success" type="button" (click)="onCancelEditItem()">Cancel</button>
+  </form>
+</div>
